@@ -2,6 +2,7 @@
 import json
 import pandas as pd
 import re
+import configs
 
 # loadlogs
 # get_news_quality
@@ -10,7 +11,8 @@ import re
 # utils.DataSet
 
 def loadlogs():
-    logfiles = json.load(open("logfiles.json"))
+    reload(configs)
+    logfiles = configs.logfiles
     anslist = []
     for tf in logfiles:
         anslist.append(json.load(open(tf)))
@@ -55,3 +57,7 @@ class DataSet:
 
     def to_pandas(self):
         return pd.DataFrame(self.column_datas)[self.column_names]
+
+if __name__ == "__main__":
+    log = loadlogs()
+    print len(log)
